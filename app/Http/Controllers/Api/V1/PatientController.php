@@ -23,12 +23,8 @@ class PatientController extends Controller
         $filter = new PatientFilter();
         $queryItems = $filter->transform($request);  // [['column', 'operator', 'value']]
 
-        if(count($queryItems) == 0) {
-            return new PatientCollection(Patient::paginate(10));
-        } else {
-            $patients = Patient::where($queryItems)->paginate(10);
-            return new PatientCollection($patients->appends($request->query()));
-        }
+        $patients = Patient::where($queryItems);
+        return new PatientCollection($patients->->paginate(10)->appends($request->query()));
     }
 
     /**

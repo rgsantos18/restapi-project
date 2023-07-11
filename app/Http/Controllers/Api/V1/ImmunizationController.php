@@ -23,12 +23,8 @@ class ImmunizationController extends Controller
         $filter = new ImmunizationFilter();
         $queryItems = $filter->transform($request);
 
-        if(count($queryItems) == 0) {
-            return new ImmunizationCollection(Immunization::paginate(10));
-        } else {
-            $immunizations = Immunization::where($queryItems)->paginate(10);
-            return new ImmunizationCollection($immunizations->appends($request->query()));
-        }
+        $immunizations = Immunization::where($queryItems);
+        return new ImmunizationCollection($immunizations->->paginate(10)->appends($request->query()));
     }
 
     /**

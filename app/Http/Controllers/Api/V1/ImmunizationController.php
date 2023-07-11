@@ -6,6 +6,8 @@ use App\Models\Immunization;
 use App\Http\Requests\StoreImmunizationRequest;
 use App\Http\Requests\UpdateImmunizationRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\ImmunizationResource;
+use App\Http\Resources\V1\ImmunizationCollection;
 
 class ImmunizationController extends Controller
 {
@@ -16,7 +18,7 @@ class ImmunizationController extends Controller
      */
     public function index()
     {
-        return Immunization::all();
+        return new ImmunizationCollection(Immunization::paginate(10));
     }
 
     /**
@@ -48,7 +50,7 @@ class ImmunizationController extends Controller
      */
     public function show(Immunization $immunization)
     {
-        //
+        return new ImmunizationResource($immunization);
     }
 
     /**

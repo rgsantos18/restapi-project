@@ -6,6 +6,8 @@ use App\Models\Patient;
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\PatientResource;
+use App\Http\Resources\V1\PatientCollection;
 
 class PatientController extends Controller
 {
@@ -16,7 +18,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return Patient::all();
+        return new PatientCollection(Patient::paginate(10));
     }
 
     /**
@@ -48,7 +50,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        return new PatientResource($patient);
     }
 
     /**

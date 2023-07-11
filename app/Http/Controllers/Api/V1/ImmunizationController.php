@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateImmunizationRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ImmunizationResource;
 use App\Http\Resources\V1\ImmunizationCollection;
+use App\Filters\V1\ImmunizationFilter;
+use Illuminate\Http\Request;
 
 class ImmunizationController extends Controller
 {
@@ -16,9 +18,17 @@ class ImmunizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ImmunizationCollection(Immunization::paginate(10));
+        $filter = new ImmunizationFilter();
+        $queryItems = $filter->transform($request);
+
+        if(count($queryItems) == 0) {
+            return new ImmunizationCollection(Immunization::paginate(10));
+        } else {
+            $immunizations = Immunization::where($queryItems)->paginate(10);
+            return new ImmunizationCollection($immunizations->appends($request->query()));
+        }
     }
 
     /**

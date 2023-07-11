@@ -21,7 +21,7 @@ class ImmunizationFactory extends Factory
             'vaccines' => $vaccines,
             'administered_by' => $this->faker->name(),
             'date_administered' => $this->faker->dateTimeThisDecade(),
-            'lot_number' => $this->faker->randomNumber(5),
+            'lot_number' => $this->faker->randomNumber(5,true),
             'date_next_dose' => $this->faker->dateTimeThisDecade(),
         ];
     }

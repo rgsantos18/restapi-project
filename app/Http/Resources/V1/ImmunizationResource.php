@@ -21,7 +21,7 @@ class ImmunizationResource extends JsonResource
             'vaccines' => $this->vaccines,
             'dateAdministered' => $this->date_administered,
             'administeredBy' => $this->administered_by,
-            'lotNumber' => $this->lo_number,
+            'lotNumber' => $this->lot_number,
             'dateNextDose' => $this->date_next_dose,
         ];
     }

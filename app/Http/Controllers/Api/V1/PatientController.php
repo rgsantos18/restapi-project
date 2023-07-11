@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatePatientRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\PatientResource;
 use App\Http\Resources\V1\PatientCollection;
+use App\Filters\V1\PatientFilter;
+use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
@@ -16,9 +18,17 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new PatientCollection(Patient::paginate(10));
+        $filter = new PatientFilter();
+        $queryItems = $filter->transform($request);  // [['column', 'operator', 'value']]
+
+        if(count($queryItems) == 0) {
+            return new PatientCollection(Patient::paginate(10));
+        } else {
+            $patients = Patient::where($queryItems)->paginate(10);
+            return new PatientCollection($patients->appends($request->query()));
+        }
     }
 
     /**

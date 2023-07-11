@@ -19,7 +19,7 @@ class CreateImmunizationsTable extends Migration
             $table->string('vaccines');
             $table->date('date_administered');
             $table->string('administered_by');
-            $table->string('lot_number');
+            $table->integer('lot_number');
             $table->date('date_next_dose');
             $table->timestamps();
         });

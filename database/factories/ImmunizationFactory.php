@@ -19,8 +19,9 @@ class ImmunizationFactory extends Factory
         return [
             'patient_id' => Patient::factory(),
             'vaccines' => $vaccines,
+            'administered_by' => $this->faker->name(),
             'date_administered' => $this->faker->dateTimeThisDecade(),
-            'lot_number' => $this->faker->number(),
+            'lot_number' => $this->faker->randomNumber(5),
             'date_next_dose' => $this->faker->dateTimeThisDecade(),
         ];
     }

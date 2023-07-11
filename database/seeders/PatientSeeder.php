@@ -20,8 +20,7 @@ class PatientSeeder extends Seeder
             ->create();
         
         Patient::factory()
-            ->count(50)
-            ->hasImmunizations(25)
+            ->count(10)
             ->create();
     }
 }

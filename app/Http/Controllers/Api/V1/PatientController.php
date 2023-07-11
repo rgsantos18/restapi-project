@@ -24,7 +24,13 @@ class PatientController extends Controller
         $queryItems = $filter->transform($request);  // [['column', 'operator', 'value']]
 
         $patients = Patient::where($queryItems);
-        return new PatientCollection($patients->->paginate(10)->appends($request->query()));
+        
+        $includeImmunizations = $request->query('includeImmunizations');
+        if($includeImmunizations) {
+            $patients = $patients->with('immunizations');
+        }
+
+        return new PatientCollection($patients->paginate(10)->appends($request->query()));
     }
 
     /**
@@ -56,6 +62,12 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        $includeImmunizations = request()->query('includeImmunizations');
+        
+        if($includeImmunizations) {
+            return new PatientResource($patient->loadMissing('immunizations'));
+        }
+
         return new PatientResource($patient);
     }
 

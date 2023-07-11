@@ -23,6 +23,7 @@ class PatientResource extends JsonResource
             'sex' => $this->sex,
             'email' => $this->email,
             'address' => $this->address,
+            'immunizations' => ImmunizationResource::collection($this->whenLoaded('immunizations'))
         ];
     }
 }

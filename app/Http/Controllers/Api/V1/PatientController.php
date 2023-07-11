@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Immunization;
-use App\Http\Requests\StoreImmunizationRequest;
-use App\Http\Requests\UpdateImmunizationRequest;
+use App\Models\Patient;
+use App\Http\Requests\StorePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
+use App\Http\Controllers\Controller;
 
-class ImmunizationController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ImmunizationController extends Controller
      */
     public function index()
     {
-        //
+        return Patient::all();
     }
 
     /**
@@ -31,10 +32,10 @@ class ImmunizationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreImmunizationRequest  $request
+     * @param  \App\Http\Requests\StorePatientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreImmunizationRequest $request)
+    public function store(StorePatientRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class ImmunizationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Immunization  $immunization
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show(Immunization $immunization)
+    public function show(Patient $patient)
     {
         //
     }
@@ -53,10 +54,10 @@ class ImmunizationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Immunization  $immunization
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Immunization $immunization)
+    public function edit(Patient $patient)
     {
         //
     }
@@ -64,11 +65,11 @@ class ImmunizationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateImmunizationRequest  $request
-     * @param  \App\Models\Immunization  $immunization
+     * @param  \App\Http\Requests\UpdatePatientRequest  $request
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateImmunizationRequest $request, Immunization $immunization)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
         //
     }
@@ -76,10 +77,10 @@ class ImmunizationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Immunization  $immunization
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Immunization $immunization)
+    public function destroy(Patient $patient)
     {
         //
     }

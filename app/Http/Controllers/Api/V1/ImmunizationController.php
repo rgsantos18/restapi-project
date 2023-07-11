@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Patient;
-use App\Http\Requests\StorePatientRequest;
-use App\Http\Requests\UpdatePatientRequest;
+use App\Models\Immunization;
+use App\Http\Requests\StoreImmunizationRequest;
+use App\Http\Requests\UpdateImmunizationRequest;
+use App\Http\Controllers\Controller;
 
-class PatientController extends Controller
+class ImmunizationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        return Immunization::all();
     }
 
     /**
@@ -31,10 +32,10 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePatientRequest  $request
+     * @param  \App\Http\Requests\StoreImmunizationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePatientRequest $request)
+    public function store(StoreImmunizationRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Immunization  $immunization
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show(Immunization $immunization)
     {
         //
     }
@@ -53,10 +54,10 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Immunization  $immunization
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(Immunization $immunization)
     {
         //
     }
@@ -64,11 +65,11 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePatientRequest  $request
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Http\Requests\UpdateImmunizationRequest  $request
+     * @param  \App\Models\Immunization  $immunization
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePatientRequest $request, Patient $patient)
+    public function update(UpdateImmunizationRequest $request, Immunization $immunization)
     {
         //
     }
@@ -76,10 +77,10 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Immunization  $immunization
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy(Immunization $immunization)
     {
         //
     }

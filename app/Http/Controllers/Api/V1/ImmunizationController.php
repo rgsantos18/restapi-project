@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Immunization;
-use App\Http\Requests\StoreImmunizationRequest;
-use App\Http\Requests\UpdateImmunizationRequest;
+use App\Http\Requests\V1\StoreImmunizationRequest;
+use App\Http\Requests\V1\UpdateImmunizationRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ImmunizationResource;
 use App\Http\Resources\V1\ImmunizationCollection;
@@ -28,16 +28,6 @@ class ImmunizationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreImmunizationRequest  $request
@@ -45,7 +35,7 @@ class ImmunizationController extends Controller
      */
     public function store(StoreImmunizationRequest $request)
     {
-        //
+        return new ImmunizationResource(Immunization::create($request->all()));
     }
 
     /**

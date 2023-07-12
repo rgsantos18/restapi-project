@@ -23,8 +23,30 @@ class StoreImmunizationRequest extends FormRequest
      */
     public function rules()
     {
+        // "patientId": 1,
+        // "vaccines": "Astra",
+        // "dateAdministered": "2019-11-12",
+        // "administeredBy": "Rollin Grimes",
+        // "lotNumber": 84702,
+        // "dateNextDose": "2022-07-06"
+
         return [
-            //
+            'patientId' => ['required','exists:patients'],
+            'vaccines' => ['required'],
+            'dateAdministered' => ['required'],
+            'administeredBy' => ['required'],
+            'lotNumber' => ['required'],
+            'dateNextDose' => ['required']
         ];
+    }
+
+    protected function prepareForValidation() {
+        $this->merge([
+            'patient_id' => $this->patientId,
+            'date_administered' => $this->dateAdministered,
+            'administered_by' => $this->administeredBy,
+            'lot_number' => $this->lotNumber,
+            'date_next_dose' => $this->dateNextDose,
+        ]);
     }
 }

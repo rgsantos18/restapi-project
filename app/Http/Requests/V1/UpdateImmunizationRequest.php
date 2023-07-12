@@ -13,7 +13,10 @@ class UpdateImmunizationRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // return false;
+        $user = $this->user();
+
+        return $user != null && $user->tokenCan('update');
     }
 
     /**

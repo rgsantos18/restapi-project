@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Immunization;
 use App\Http\Requests\V1\StoreImmunizationRequest;
+use App\Http\Requests\V1\BulkStoreImmunizationRequest;
 use App\Http\Requests\V1\UpdateImmunizationRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ImmunizationResource;
@@ -36,6 +37,28 @@ class ImmunizationController extends Controller
     public function store(StoreImmunizationRequest $request)
     {
         return new ImmunizationResource(Immunization::create($request->all()));
+    }
+
+    public function bulkStore(BulkStoreImmunizationRequest $request) {
+        $bulk = $request->all();
+        $data = [];
+        
+        $column_map = [
+            'patientId' => 'patient_id',
+            'dateAdministered' => 'date_administered',
+            'administeredBy' => 'administered_by',
+            'lotNumber' => 'lot_number',
+            'dateNextDose' => 'date_next_dose',
+        ];
+
+        foreach ($bulk as $key => $obj) {
+            foreach ($obj as $name => $value) {
+                $column = $column_map[$name] ?? $name;
+                $data[$key][$column] = $value;
+            }
+        }
+
+        Immunization::insert($data);
     }
 
     /**

@@ -21,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
     Route::apiResource('patients', PatientController::class);
     Route::apiResource('immunizations', ImmunizationController::class);
+    
+    // Custom routes
+    Route::post('immunizations/bulk', ['uses' => 'ImmunizationController@bulkStore']);
 });

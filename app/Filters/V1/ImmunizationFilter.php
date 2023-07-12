@@ -15,6 +15,7 @@ class ImmunizationFilter extends ApiFilter {
     ];
 
     protected $column_map = [
+        'patientId' => 'patient_id',
         'dateAdministered' => 'date_administered',
         'administeredBy' => 'administered_by',
         'lotNumber' => 'lot_number',

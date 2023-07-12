@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class StoreImmunizationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class StoreImmunizationRequest extends FormRequest
         // "dateNextDose": "2022-07-06"
 
         return [
-            'patientId' => ['required','exists:patients'],
+            'patientId' => ['required','exists:patients,id'],
             'vaccines' => ['required'],
             'dateAdministered' => ['required'],
             'administeredBy' => ['required'],

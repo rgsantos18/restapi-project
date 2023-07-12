@@ -13,7 +13,7 @@ class UpdateImmunizationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,47 @@ class UpdateImmunizationRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $method = $this->method();
+
+        if($method == 'PUT') {
+            return [
+                'patientId' => ['required','exists:patients,id'],
+                'vaccines' => ['required'],
+                'dateAdministered' => ['required'],
+                'administeredBy' => ['required'],
+                'lotNumber' => ['required'],
+                'dateNextDose' => ['required']
+            ];
+        } else {
+            return [
+                'patientId' => ['sometimes','required','exists:patients,id'],
+                'vaccines' => ['sometimes','required'],
+                'dateAdministered' => ['sometimes','required'],
+                'administeredBy' => ['sometimes','required'],
+                'lotNumber' => ['sometimes','required'],
+                'dateNextDose' => ['sometimes','required']
+            ];   
+        }
+    }
+
+    protected function prepareForValidation() {
+        $requestToValidate = $this->toArray();
+
+        $transform = [];
+        $column_map = [
+            'patientId' => 'patient_id',
+            'dateAdministered' => 'date_administered',
+            'administeredBy' => 'administered_by',
+            'lotNumber' => 'lot_number',
+            'dateNextDose' => 'date_next_dose',
         ];
+        
+        foreach ($requestToValidate as $key => $value) {
+            if(isset($column_map[$key])) {
+                $transform[ $column_map[$key] ] = $value;
+            }
+        }
+        
+        $this->merge($transform);
     }
 }

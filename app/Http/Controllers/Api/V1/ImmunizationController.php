@@ -92,7 +92,7 @@ class ImmunizationController extends Controller
      */
     public function update(UpdateImmunizationRequest $request, Immunization $immunization)
     {
-        //
+        return $immunization->update($request->all());
     }
 
     /**

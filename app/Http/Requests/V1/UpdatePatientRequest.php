@@ -3,6 +3,7 @@
 namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePatientRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdatePatientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,42 @@ class UpdatePatientRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT') {
+            return [
+                'name' => ['required'],
+                'birthDate' => ['required'],
+                'sex' => ['required', Rule::in(['male', 'female'])],
+                'phoneNumber' => ['required'],
+                'email' => ['required', 'email'],
+                'ethnicity' => ['sometimes','required'],
+                'address' =>  ['required']
+            ];
+        } else {
+            return [
+                'name' => ['sometimes','required'],
+                'birthDate' => ['sometimes','required'],
+                'sex' => ['sometimes','required', Rule::in(['male', 'female'])],
+                'phoneNumber' => ['sometimes','required'],
+                'email' => ['sometimes','required','email'],
+                'ethnicity' => ['sometimes','required'],
+                'address' =>  ['sometimes','required']
+            ];
+        }
+    }
+
+    protected function prepareForValidation() {
+        if($this->phoneNumber) {
+            $this->merge([
+                'phone_number' => $this->phoneNumber,
+            ]);
+        }
+        
+        if($this->birthDate) {
+            $this->merge([
+                'birth_date' => $this->birthDate,
+            ]);
+        }
     }
 }

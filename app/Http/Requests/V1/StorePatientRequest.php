@@ -38,7 +38,7 @@ class StorePatientRequest extends FormRequest
     protected function prepareForValidation() {
         $this->merge([
             'birth_date' => $this->birthDate,
-            'postal_code' => $this->phoneNumber,
+            'phone_number' => $this->phoneNumber,
         ]);
     }
 }

@@ -103,6 +103,6 @@ class ImmunizationController extends Controller
      */
     public function destroy(Immunization $immunization)
     {
-        //
+        $immunization->delete();
     }
 }
